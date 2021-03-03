@@ -63,11 +63,13 @@ impl Matryoshka {
 
     #[payable]
     pub fn airdrop(&mut self, amount: U128, contract_address: AccountId) -> Promise {
-        env::log(format!("@{} is farming on {} with {}",
-                         env::predecessor_account_id(), contract_address, env::current_account_id()).as_bytes());
+        let current_user = env::signer_account_id();
+        let current_contract = env::current_account_id();
+        env::log(format!("@{} applied for airdrop on {} with {}",
+                         current_user, contract_address, current_contract).as_bytes());
 
         bridge_token::transfer(
-            env::predecessor_account_id(),
+            current_user,
             amount,
             &contract_address,
             NO_DEPOSIT,
