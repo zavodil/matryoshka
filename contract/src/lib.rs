@@ -52,10 +52,10 @@ impl Matryoshka {
             BASE_GAS)
     }
 
-    pub fn get_allowance(&self, account_id: AccountId, contract_address: AccountId) -> Promise {
+    pub fn get_allowance(&self, owner_id: AccountId, escrow_account_id: AccountId, contract_address: AccountId) -> Promise {
         bridge_token::get_allowance(
-            account_id,
-            contract_address.clone(),
+            owner_id,
+            escrow_account_id,
             &contract_address,
             NO_DEPOSIT,
             BASE_GAS)
